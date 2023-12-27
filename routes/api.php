@@ -22,19 +22,19 @@ Route::middleware([BearerAuth::class])->prefix('v1')->group(function () {
                     "status" => "error",
                     "code" => 400,
                     "message" => "Only GET is supported"
-                ]);
+                ], 400);
             case 'convert':
                 return request()->method() == 'POST' ? app()->call('App\Http\Controllers\CurrencyController@convert') : response()->json([
                     "status" => "error",
                     "code" => 400,
                     "message" => "Only POST is supported"
-                ]);
+                ], 400);
             default:
             return response()->json([
                 "status" => "error",
                 "code" => 400,
                 "message" => "Incorrect method value"
-            ]);
+            ], 400);
         }
     });
 });
